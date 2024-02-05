@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Solana Wallet APP</title>
+</head>
+<body style="display: flex; text-align: center; justify-content: center;">
+    <div style="border: 2px solid rgb(92, 12, 12); width: max-content; padding: 25px; margin-top: 5%;
+    ">
+         
+  
+    <h1 style="color: rgb(160, 14, 14);">Solana Wallet APP</h1>
+    <label for="command">BUTTON:</label>
+    <input type="text" id="command" name="command">
+    <button style="padding:5px 15px 5px 15px; border-color: rgb(87, 12, 12); border-radius: 40px;" onclick="sendCommand()">SEND</button>
+
+    <div id="output"></div>
+    </div>
+
+    <script>
+        async function sendCommand() {
+            const commandInput = document.getElementById('command').value.trim();
+
+            const response = await fetch('/command', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ command: commandInput })
+            });
+
+            const result = await response.text();
+            document.getElementById('output').innerText = result;
+        }
+    </script>
+</body>
+</html>
